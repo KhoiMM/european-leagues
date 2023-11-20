@@ -1,0 +1,45 @@
+<h2>FOOTBALL UPDATES</h2>
+
+<div class="countries">
+  <button [id]="country.countryName + 'Select'" class="country" *ngFor="let country of countries" (click)="changeCountry(country)">
+    {{ country.countryName }}
+  </button>
+</div>
+
+<div *ngIf="isLoading; else loaded">
+  Loading...
+</div>
+
+<ng-template #loaded>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>Name</th>
+        <th>Games</th>
+        <th>W</th>
+        <th>L</th>
+        <th>D</th>
+        <th>Goal Difference</th>
+        <th>Points</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <tr *ngFor="let standing of standings">
+        <td>{{ standing.rank }}</td>
+        <td>
+          <img [src]="standing.team.logo" width="24" height="24" />
+        </td>
+        <td><a [routerLink]="['/history/', standing.team.id]">{{standing.team.name}}</a></td>
+        <td>{{standing.all.played}}</td>
+        <td>{{standing.all.win}}</td>
+        <td>{{standing.all.lose}}</td>
+        <td>{{standing.all.draw}}</td>
+        <td>{{standing.goalsDiff}}</td>
+        <td>{{standing.points}}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>

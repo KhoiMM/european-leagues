@@ -1,0 +1,22 @@
+<h2>LAST 10 GAMES</h2>
+
+<div *ngIf="isLoading; else loaded">
+  Loading...
+</div>
+
+<ng-template #loaded>
+  <div class="block-matches">
+    <div class="match" *ngFor="let match of matches">
+        <div><img [src]="match.teams.home.logo" width="30" height="30"/></div>
+        <div>{{match.teams.home.name}}</div>
+        <div>{{match.goals.home}}</div>
+        <span>-</span>
+        <div>{{match.goals.away}}</div>
+        <div>{{match.teams.away.name}}</div>
+        <div><img [src]="match.teams.away.logo" width="30" height="30"/></div>
+    </div>
+  </div>
+</ng-template>
+
+
+<button class="btn-back" [routerLink]="['/standings']">Back</button>

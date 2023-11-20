@@ -1,0 +1,19 @@
+:host {
+  h2 {
+    text-align: center;
+  }
+
+  .countries {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    font-size: 18px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    margin: 2rem 0 2rem;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+}
