@@ -3,11 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StandingResponse } from '../models/standing';
 
+interface Country {
+  leagueId: number;
+  countryName: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class StandingService {
   private readonly API_URL = 'https://v3.football.api-sports.io/standings';
+  selectedCountry: Country = null;
 
   constructor(private http: HttpClient) {}
 

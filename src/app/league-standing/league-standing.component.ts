@@ -15,7 +15,6 @@ interface Country {
 })
 export class LeagueStandingComponent implements OnInit, OnDestroy {
   standings: Standing[] = [];
-  selectedCountry: Country;
   isLoading: boolean = true;
   subscription = Subscription.EMPTY;
 
@@ -45,14 +44,16 @@ export class LeagueStandingComponent implements OnInit, OnDestroy {
   constructor(private standingService: StandingService) {}
 
   ngOnInit(): void {
-    this.selectedCountry = this.countries[0];
+    if (!this.standingService.selectedCountry) {
+      this.standingService.selectedCountry = this.countries[0];
+    }
     this.getCurrentStandingsByLeague();
   }
 
   getCurrentStandingsByLeague() {
     this.standingService
       .getCurrentStandingsByLeagueId(
-        this.selectedCountry.leagueId,
+        this.standingService.selectedCountry.leagueId,
         new Date().getFullYear()
       )
       .subscribe((res) => {
@@ -62,9 +63,9 @@ export class LeagueStandingComponent implements OnInit, OnDestroy {
   }
 
   changeCountry(selectedCountry: Country) {
-    if (this.selectedCountry.leagueId !== selectedCountry.leagueId) {
+    if (this.standingService.selectedCountry.leagueId !== selectedCountry.leagueId) {
       this.isLoading = true;
-      this.selectedCountry = selectedCountry;
+      this.standingService.selectedCountry = selectedCountry;
       this.getCurrentStandingsByLeague();
     }
   }
