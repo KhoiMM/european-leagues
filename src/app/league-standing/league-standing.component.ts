@@ -15,7 +15,7 @@ interface Country {
 })
 export class LeagueStandingComponent implements OnInit, OnDestroy {
   standings: Standing[] = [];
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   subscription = Subscription.EMPTY;
 
   readonly countries: Country[] = [
@@ -44,16 +44,17 @@ export class LeagueStandingComponent implements OnInit, OnDestroy {
   constructor(private standingService: StandingService) {}
 
   ngOnInit(): void {
-    if (!this.standingService.selectedCountry) {
-      this.standingService.selectedCountry = this.countries[0];
+    if (!sessionStorage.getItem('leagueId')) {
+      sessionStorage.setItem('leagueId', this.countries[0].leagueId.toString());
     }
     this.getCurrentStandingsByLeague();
   }
 
   getCurrentStandingsByLeague(): void {
+    this.isLoading = true;
     this.standingService
       .getCurrentStandingsByLeagueId(
-        this.standingService.selectedCountry.leagueId,
+        Number(sessionStorage.getItem('leagueId')),
         new Date().getFullYear()
       )
       .subscribe((res) => {
@@ -62,9 +63,9 @@ export class LeagueStandingComponent implements OnInit, OnDestroy {
       });
   }
 
-  changeCountry(selectedCountry: Country) {
-    if (this.standingService.selectedCountry.leagueId !== selectedCountry.leagueId) {
-      this.isLoading = true;
+  changeCountry(selectedCountry: Country): void {
+    if (Number(sessionStorage.getItem('leagueId')) !== selectedCountry.leagueId) {
+      sessionStorage.setItem('leagueId', selectedCountry.leagueId.toString());
       this.standingService.selectedCountry = selectedCountry;
       this.getCurrentStandingsByLeague();
     }
