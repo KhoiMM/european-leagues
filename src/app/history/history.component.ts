@@ -25,7 +25,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  get10LastMatches(teamId: number) {
+  get10LastMatches(teamId: number): void {
     this.historyService.getHistory(teamId, 10).subscribe((res) => {
       this.matches = res.response;
       this.isLoading = false;

@@ -50,7 +50,7 @@ export class LeagueStandingComponent implements OnInit, OnDestroy {
     this.getCurrentStandingsByLeague();
   }
 
-  getCurrentStandingsByLeague() {
+  getCurrentStandingsByLeague(): void {
     this.standingService
       .getCurrentStandingsByLeagueId(
         this.standingService.selectedCountry.leagueId,
