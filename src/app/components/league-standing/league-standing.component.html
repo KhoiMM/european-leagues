@@ -1,7 +1,7 @@
 <h2>FOOTBALL UPDATES</h2>
 
 <div class="countries">
-  <button [id]="country.countryName + 'Select'" class="country" *ngFor="let country of countries" (click)="changeCountry(country)">
+  <button [id]="country.countryName + 'Select'" class="btn-country" *ngFor="let country of countries" (click)="changeCountry(country)">
     {{ country.countryName }}
   </button>
 </div>

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { LeagueStandingComponent } from './league-standing/league-standing.component';
+import { LeagueStandingComponent } from './components/league-standing/league-standing.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { HistoryComponent } from './history/history.component';
+import { HistoryComponent } from './components/history/history.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [

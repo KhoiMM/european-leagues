@@ -7,7 +7,7 @@ import { HistoryResponse } from '../models/history';
   providedIn: 'root',
 })
 export class HistoryService {
-  private readonly API_URL = 'https://v3.football.api-sports.io/fixtures';
+  private readonly API_URL: string = 'https://v3.football.api-sports.io/fixtures';
 
   constructor(private http: HttpClient) {}
 

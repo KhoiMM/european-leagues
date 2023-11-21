@@ -12,7 +12,7 @@ interface Country {
   providedIn: 'root',
 })
 export class StandingService {
-  private readonly API_URL = 'https://v3.football.api-sports.io/standings';
+  private readonly API_URL: string = 'https://v3.football.api-sports.io/standings';
   selectedCountry: Country = null;
 
   constructor(private http: HttpClient) {}

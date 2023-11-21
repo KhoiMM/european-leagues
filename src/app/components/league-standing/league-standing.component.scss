@@ -8,12 +8,26 @@
     justify-content: center;
     gap: 28px;
     font-size: 18px;
-    box-shadow: 1px 1px 1px 1px #ccc;
     margin: 2rem 0 2rem;
+  }
+
+  .btn-country {
+    height: 32px;
+    font-size: 16px;
+    text-transform: capitalize;
   }
 
   table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+  }
+
+  th, td {
+    text-align: center;
+    padding: 0 8px 0;
+  }
+
+  table {
+    margin: 0 auto;
   }
 }

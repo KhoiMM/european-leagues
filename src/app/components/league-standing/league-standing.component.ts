@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Standing } from '../models/standing';
-import { StandingService } from '../services/standing.service';
+import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs';
+import { Standing } from '../../models/standing';
+import { StandingService } from '../../services/standing.service';
 
 interface Country {
   leagueId: number;
@@ -13,31 +13,30 @@ interface Country {
   templateUrl: './league-standing.component.html',
   styleUrls: ['./league-standing.component.scss'],
 })
-export class LeagueStandingComponent implements OnInit, OnDestroy {
+export class LeagueStandingComponent implements OnInit {
   standings: Standing[] = [];
   isLoading: boolean = false;
-  subscription = Subscription.EMPTY;
 
   readonly countries: Country[] = [
     {
       leagueId: 39,
-      countryName: 'England',
+      countryName: 'england',
     },
     {
       leagueId: 140,
-      countryName: 'Spain',
+      countryName: 'spain',
     },
     {
       leagueId: 78,
-      countryName: 'Germany',
+      countryName: 'germany',
     },
     {
       leagueId: 61,
-      countryName: 'France',
+      countryName: 'france',
     },
     {
       leagueId: 135,
-      countryName: 'Italy',
+      countryName: 'italy',
     },
   ];
 
@@ -57,6 +56,7 @@ export class LeagueStandingComponent implements OnInit, OnDestroy {
         Number(sessionStorage.getItem('leagueId')),
         new Date().getFullYear()
       )
+      .pipe(take(1))
       .subscribe((res) => {
         this.standings = res.response[0].league.standings[0];
         this.isLoading = false;
@@ -64,14 +64,11 @@ export class LeagueStandingComponent implements OnInit, OnDestroy {
   }
 
   changeCountry(selectedCountry: Country): void {
-    if (Number(sessionStorage.getItem('leagueId')) !== selectedCountry.leagueId) {
+    if (
+      Number(sessionStorage.getItem('leagueId')) !== selectedCountry.leagueId
+    ) {
       sessionStorage.setItem('leagueId', selectedCountry.leagueId.toString());
-      this.standingService.selectedCountry = selectedCountry;
       this.getCurrentStandingsByLeague();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
