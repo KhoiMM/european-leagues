@@ -26,7 +26,7 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
   ],
   providers: [],
   bootstrap: [AppComponent],
