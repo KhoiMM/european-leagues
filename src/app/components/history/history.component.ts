@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs';
 import { Match } from '../../models/history';
 import { HistoryService } from '../../services/history.service';
-import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-history',
@@ -19,7 +19,7 @@ export class HistoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(take(1)).subscribe((params) => {
       this.get10LastMatches(Number(params['teamId']));
     });
   }
